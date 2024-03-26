@@ -1,6 +1,6 @@
 # Contributing to the Dashboard Project
 
-Thank you for considering contributing to the Dashboard project! Your participation is crucial for the growth and improvement of our project and community. We invite you to read through these guidelines to foster a positive and collaborative environment for everyone involved.
+Thank you for considering contributing to the BigMac Dashboard project! Your participation is crucial for the growth and improvement of our project and community. We invite you to read through these guidelines to foster a positive and collaborative environment for everyone involved.
 
 ## Ways to Contribute
 
