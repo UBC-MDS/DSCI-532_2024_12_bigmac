@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We, the contributors and maintainers of the Dashboard project, pledge to make participation in our project and community a harassment-free experience for everyone, regardless of personal backgrounds and identities. We are committed to creating a welcoming and inclusive environment for all.
+We, the contributors and maintainers of the BigMac Dasboard project, pledge to make participation in our project and community a harassment-free experience for everyone, regardless of personal backgrounds and identities. We are committed to creating a welcoming and inclusive environment for all.
 
 ## Our Standards
 
