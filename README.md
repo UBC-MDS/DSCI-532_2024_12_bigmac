@@ -52,7 +52,7 @@ Interested in enhancing the Big Mac Index Dashboard? See our [Contributing Guide
 To run the dashboard locally, ensure you have Dash installed. Clone the repository, navigate to the project directory, and execute:
 
 ```bash
-python app.py
+python toy_script.py
 ```
 
 ## Team
