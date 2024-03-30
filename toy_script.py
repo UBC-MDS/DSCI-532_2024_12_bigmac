@@ -38,14 +38,26 @@ merged_data.head()
 app = dash.Dash(__name__)
 
 # Define the figure for the global map view
-fig_map = px.scatter_geo(merged_data,
-                         locations="country",
-                         locationmode="country names",
-                         size="bigmacs_per_hour",
-                         projection="natural earth",
-                         title="Global Big Macs per Hour",
-                         hover_name="country",
-                         hover_data={"year": True, "bigmacs_per_hour": True})
+fig_map = px.choropleth(merged_data,
+                        locations="country",
+                        locationmode="country names",
+                        color="bigmacs_per_hour",
+                        hover_name="country",
+                        hover_data={"year": True, "bigmacs_per_hour": True, "dollar_price": True},
+                        projection="natural earth",
+                        title="Global Big Macs per Hour",
+                        color_continuous_scale=px.colors.sequential.Plasma)
+
+fig_map.update_geos(
+    showcountries=True, countrycolor="RebeccaPurple"
+)
+
+fig_map.update_layout(
+    margin={"r":0,"t":0,"l":0,"b":0},
+    coloraxis_colorbar={
+        'title':'Big Macs/hr'
+    }
+)
 
 # Define the layout of the app
 app.layout = html.Div(children=[
