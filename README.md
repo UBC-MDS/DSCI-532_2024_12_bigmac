@@ -14,6 +14,8 @@
 
 **The Big Mac Dashboard** provides interactive visual insights into the purchasing power parity (PPP) and economic trends across the globe using the Big Mac Index and minimum wage data. Aimed at economists, policy makers, financial analysts, and the general public, the dashboard simplifies the understanding of complex economic indicators through engaging and comparative visualizations.
 
+![sketch dashboard](https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac/blob/main/img/sketch.jpg)
+
 ## Use the App
 
 Access the live dashboard [here!](#) (URL to be updated upon deployment)
@@ -50,7 +52,7 @@ Interested in enhancing the Big Mac Index Dashboard? See our [Contributing Guide
 To run the dashboard locally, ensure you have Dash installed. Clone the repository, navigate to the project directory, and execute:
 
 ```bash
-python app.py
+python toy_script.py
 ```
 
 ## Team
