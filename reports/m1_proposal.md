@@ -35,7 +35,7 @@ Through interactive visualizations, Maria observes trends and anomalies, such as
 
 ## 4. App Sketch and Description
 
-*Dashboard Sketch*
+![Dashboard Sketch](../img/sketch.jpg)
 
 Our dashboard is designed for simplicity and interactivity, allowing users to engage with the data through:
 

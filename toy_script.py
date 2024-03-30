@@ -38,6 +38,7 @@ merged_data.head()
 app = dash.Dash(__name__)
 
 # Define the figure for the global map view
+
 fig_map = px.choropleth(merged_data,
                         locations="country",
                         locationmode="country names",
@@ -58,6 +59,7 @@ fig_map.update_layout(
         'title':'Big Macs/hr'
     }
 )
+
 
 # Define the layout of the app
 app.layout = html.Div(children=[
