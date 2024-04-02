@@ -13,13 +13,16 @@ wage_data = pd.read_csv("data/raw/wage.csv")
 bigmac_data['year'] = pd.to_datetime(bigmac_data['date']).dt.year
 
 # Convert annual wage to hourly assuming 40-hour work week and 52 weeks per year
-wage_data['hourly_wage_usd'] = wage_data['Value'] / (40 * 52)
+# wage_data['hourly_wage_usd'] = wage_data['Value'] / (40 * 52)
+
+# Using only the hourly wage data
+wage_data = wage_data[(wage_data['Pay period'] == 'Hourly') & (wage_data['Series'] == 'In 2022 constant prices at 2022 USD PPPs')]
 
 bigmac_prepared = bigmac_data[['name', 'year', 'local_price', 'dollar_price']].copy()
 bigmac_prepared.rename(columns={'name': 'country'}, inplace=True)
 
-wage_prepared = wage_data[['Country', 'Time', 'hourly_wage_usd']].copy()
-wage_prepared.rename(columns={'Country': 'country', 'Time': 'year'}, inplace=True)
+wage_prepared = wage_data[['Country', 'Time', 'Value']].copy()
+wage_prepared.rename(columns={'Country': 'country', 'Time': 'year', 'Value':'hourly_wage_usd'}, inplace=True)
 
 # Ensure 'year' is integer for both datasets
 bigmac_prepared['year'] = bigmac_prepared['year'].astype(int)
@@ -30,6 +33,7 @@ merged_data = pd.merge(bigmac_prepared, wage_prepared, on=['country', 'year'], h
 
 # Calculate 'Big Macs per hour'
 merged_data['bigmacs_per_hour'] = merged_data['hourly_wage_usd'] / merged_data['dollar_price']
+merged_data.to_csv('data/processed/merged_data.csv', index=False)
 
 merged_data.head()
 
