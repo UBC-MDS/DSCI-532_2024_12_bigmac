@@ -65,39 +65,63 @@ fig_map.update_layout(
 )
 
 
-# Define the layout of the app
 app.layout = html.Div(children=[
-    html.H1(children='Big Mac Index Dashboard'),
+    # Title
+    html.Div(
+        html.H1('Big Mac Index Dashboard'),
+        style={'textAlign': 'center', 'marginTop': 50, 'marginBottom': 50}
+    ),
     
-    dcc.Graph(id='global-map', figure=fig_map),
-    
+    # Filters for Country and Year
     html.Div([
-        html.Label('Select Country:'),
-        dcc.Dropdown(id='country-dropdown',
-                     options=[{'label': i, 'value': i} for i in merged_data['country'].unique()],
-                     value='United States'),
-        
-        dcc.Graph(id='time-series-plot'),
-        
-        html.Label('Select Year:'),
-        dcc.Slider(id='year-slider',
-                   min=merged_data['year'].min(),
-                   max=merged_data['year'].max(),
-                   value=merged_data['year'].max(),
-                   marks={str(year): str(year) for year in merged_data['year'].unique()},
-                   step=None),
-        
-        html.Div(id='buying-power-calculator'),
-        
-        dcc.Checklist(id='inflation-adjustment-toggle',
-                      options=[{'label': 'Adjust for Inflation', 'value': 'adjust'}],
-                      value=[]),
-        
-        dcc.RadioItems(id='currency-conversion-option',
-                       options=[{'label': 'Local Currency', 'value': 'local'},
-                                {'label': 'USD', 'value': 'USD'}],
-                       value='USD')
+    dcc.Dropdown(
+        id='country-dropdown',
+        options=[{'label': i, 'value': i} for i in merged_data['country'].unique()],
+        value='United States',
+        style={'width': '48%', 'display': 'inline-block'}
+    ),
+    html.Div([  # Wrapping the slider within an html.Div for styling
+        dcc.Slider(
+            id='year-slider',
+            min=merged_data['year'].min(),
+            max=merged_data['year'].max(),
+            value=merged_data['year'].max(),
+            marks={str(year): str(year) for year in merged_data['year'].unique()},
+            step=None,
+        )
+    ], style={'width': '48%', 'display': 'inline-block', 'marginLeft': '4%'}),  # Style is applied here
+], style={'marginTop': 20, 'marginBottom': 20}),
+
+
+    # Global Map View and Key Metrics
+    html.Div([
+        dcc.Graph(id='global-map', figure=fig_map, style={'width': '65%', 'display': 'inline-block'}),
+        html.Div(id='key-metrics', children=[
+            # Big Mac Index and other key metrics will be added here
+            html.H3('Key Metrics'),
+            html.Div(id='big-mac-index-metric'),
+            html.Div(id='local-currency-metric'),
+            # Inflation Adjustment Toggle and Currency Conversion Option
+            dcc.Checklist(
+                id='inflation-adjustment-toggle',
+                options=[{'label': 'Adjust for Inflation', 'value': 'adjust'}],
+                value=[]
+            ),
+            dcc.RadioItems(
+                id='currency-conversion-option',
+                options=[{'label': 'Local Currency', 'value': 'local'}, {'label': 'USD', 'value': 'USD'}],
+                value='USD'
+            ),
+            # Buying Power Calculator (Will be updated with callback)
+            html.Div(id='buying-power-calculator'),
+        ], style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top', 'marginLeft': '5%'})
     ]),
+
+    # Time Series Plots for Big Mac Price Trend and Minimum Wage Trend
+    html.Div([
+        dcc.Graph(id='time-series-plot', style={'width': '48%', 'display': 'inline-block'}),
+        dcc.Graph(id='minimum-wage-trend', style={'width': '48%', 'display': 'inline-block', 'marginLeft': '4%'})
+    ])
 ])
 
 # Callback to update the time series plot
