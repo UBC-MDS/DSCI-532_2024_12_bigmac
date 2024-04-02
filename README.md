@@ -18,7 +18,7 @@
 
 ## Use the App
 
-Access the live dashboard [here!](#) (URL to be updated upon deployment)
+Access the live dashboard [here!](https://dsci-532-2024-12-bigmac.onrender.com/) 
 
 ## About the Data
 
