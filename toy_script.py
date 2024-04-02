@@ -36,6 +36,7 @@ merged_data.head()
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
+server = app.server
 
 # Define the figure for the global map view
 
@@ -139,4 +140,4 @@ def update_buying_power(selected_country, selected_year):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=True, host='127.0.0.1')
+    app.run_server(debug=False, host='127.0.0.1')
