@@ -4,6 +4,8 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
+from dash.exceptions import PreventUpdate
+import plotly.graph_objects as go
 
 bigmac_data = pd.read_csv("data/raw/bigmac_price.csv")
 wage_data = pd.read_csv("data/raw/wage.csv")
@@ -11,9 +13,6 @@ wage_data = pd.read_csv("data/raw/wage.csv")
 # Data Wrangling
 
 bigmac_data['year'] = pd.to_datetime(bigmac_data['date']).dt.year
-
-# Convert annual wage to hourly assuming 40-hour work week and 52 weeks per year
-# wage_data['hourly_wage_usd'] = wage_data['Value'] / (40 * 52)
 
 # Using only the hourly wage data
 wage_data = wage_data[(wage_data['Pay period'] == 'Hourly') & (wage_data['Series'] == 'In 2022 constant prices at 2022 USD PPPs')]
@@ -33,9 +32,18 @@ merged_data = pd.merge(bigmac_prepared, wage_prepared, on=['country', 'year'], h
 
 # Calculate 'Big Macs per hour'
 merged_data['bigmacs_per_hour'] = merged_data['hourly_wage_usd'] / merged_data['dollar_price']
-merged_data.to_csv('data/processed/merged_data.csv', index=False)
 
-merged_data.head()
+# Calculate Inflation
+bigmac_prepared.sort_values(by=['country', 'year'], inplace=True)
+
+# Calculate the year-over-year percentage change in local_price for each country
+bigmac_prepared['inflation'] = bigmac_prepared.groupby('country')['local_price'].pct_change() * 100
+
+# Merge
+merged_data = pd.merge(merged_data, bigmac_prepared[['country', 'year', 'inflation']], on=['country', 'year'], how='left')
+
+# Saving the final dataset
+merged_data.to_csv('data/processed/merged_data_with_inflation.csv', index=False)
 
 
 # Initialize the Dash app
@@ -66,7 +74,6 @@ fig_map.update_layout(
 
 
 app.layout = html.Div(children=[
-    # Title
     html.Div(
         html.H1('Big Mac Index Dashboard'),
         style={'textAlign': 'center', 'marginTop': 50, 'marginBottom': 50}
@@ -113,8 +120,8 @@ app.layout = html.Div(children=[
                 value='USD'
             ),
             # Buying Power Calculator (Will be updated with callback)
-            html.Div(id='buying-power-calculator'),
-        ], style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top', 'marginLeft': '5%'})
+            dcc.Graph(id='buying-power-plot'),
+        ], style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'bottom', 'marginLeft': '5%'})
     ]),
 
     # Time Series Plots for Big Mac Price Trend and Minimum Wage Trend
@@ -133,13 +140,11 @@ app.layout = html.Div(children=[
      Input('currency-conversion-option', 'value')]
 )
 def update_time_series(selected_country, selected_year, inflation_adjusted, currency):
-    # Placeholder logic for filtering and adjusting data
     filtered_data = merged_data[(merged_data['country'] == selected_country) &
                                 (merged_data['year'] <= selected_year)]
     
-    # Placeholder for actual inflation adjustment and currency conversion
     if inflation_adjusted:
-        pass  # Apply inflation adjustment
+        pass 
     if currency == 'local':
         y_data = 'local_price'
     else:
@@ -148,22 +153,69 @@ def update_time_series(selected_country, selected_year, inflation_adjusted, curr
     fig = px.line(filtered_data, x='year', y=[y_data, 'hourly_wage_usd'],
                   title=f'Big Mac Price and Minimum Wage Trends in {selected_country}')
     
-    # Update plot aesthetics
-    
     return fig
 
-# Callback to update the buying power calculator
+
 @app.callback(
-    Output('buying-power-calculator', 'children'),
-    [Input('country-dropdown', 'value'),
-     Input('year-slider', 'value')]
+    Output('buying-power-plot', 'figure'),
+    [Input('country-dropdown', 'value')]
 )
-def update_buying_power(selected_country, selected_year):
-    # Placeholder logic to calculate the buying power
-    buying_power = merged_data[(merged_data['country'] == selected_country) &
-                               (merged_data['year'] == selected_year)]['bigmacs_per_hour'].values[0]
-    
-    return f'Buying Power: {buying_power:.2f} Big Macs per hour of work'
+def update_buying_power_plot(selected_country):
+    filtered_data = merged_data[merged_data['country'] == selected_country]
+
+    if filtered_data.empty:
+        return go.Figure()
+
+    # line plot for buying power over time
+    fig = px.line(filtered_data, x='year', y='bigmacs_per_hour',
+                  title=f'Buying Power Over Time in {selected_country}')
+
+    fig.update_layout(
+        xaxis_title='Year',
+        yaxis_title='Big Macs per Hour',
+        margin={'l': 40, 'b': 40, 't': 40, 'r': 0},
+        hovermode='closest'
+    )
+
+    fig.update_traces(line=dict(color='RoyalBlue'))
+
+    return fig
+
+
+@app.callback(
+    Output('minimum-wage-trend', 'figure'),
+    [Input('country-dropdown', 'value'),
+     Input('year-slider', 'value')] 
+)
+def update_minimum_wage_trend(selected_country, selected_year):
+    filtered_data = merged_data[merged_data['year'] == selected_year]
+
+    if filtered_data.empty:
+        return go.Figure()
+
+    fig = go.Figure()
+
+    # Add a bar for each country
+    for country in filtered_data['country'].unique():
+        fig.add_trace(go.Bar(
+            x=[country],
+            y=filtered_data[filtered_data['country'] == country]['hourly_wage_usd'],
+            name=country,
+            marker_color='lightslategray' if country != selected_country else 'crimson'  # Highlight selected country
+        ))
+
+    # Update the layout
+    fig.update_layout(
+        title=f'Hourly Wage (USD) in {selected_year}',
+        xaxis_title='Country',
+        yaxis_title='Hourly Wage (USD)',
+        xaxis={'categoryorder': 'total descending'},
+        margin={'l': 40, 'b': 40, 't': 40, 'r': 0},
+        hovermode='closest'
+    )
+
+    return fig
+
 
 # Run the app
 if __name__ == '__main__':
