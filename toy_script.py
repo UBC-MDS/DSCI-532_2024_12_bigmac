@@ -184,25 +184,38 @@ def update_buying_power_plot(selected_country):
 
 @app.callback(
     Output('minimum-wage-trend', 'figure'),
-    [Input('country-dropdown', 'value')]
+    [Input('country-dropdown', 'value'),
+     Input('year-slider', 'value')] 
 )
-def update_minimum_wage_trend(selected_country):
-    filtered_data = merged_data[merged_data['country'] == selected_country]
+def update_minimum_wage_trend(selected_country, selected_year):
+    filtered_data = merged_data[merged_data['year'] == selected_year]
 
     if filtered_data.empty:
         return go.Figure()
 
-    fig = px.line(filtered_data, x='year', y='hourly_wage_usd',
-                  title=f'Minimum Wage Trends in {selected_country}')
+    fig = go.Figure()
 
+    # Add a bar for each country
+    for country in filtered_data['country'].unique():
+        fig.add_trace(go.Bar(
+            x=[country],
+            y=filtered_data[filtered_data['country'] == country]['hourly_wage_usd'],
+            name=country,
+            marker_color='lightslategray' if country != selected_country else 'crimson'  # Highlight selected country
+        ))
+
+    # Update the layout
     fig.update_layout(
-        xaxis_title='Year',
+        title=f'Hourly Wage (USD) in {selected_year}',
+        xaxis_title='Country',
         yaxis_title='Hourly Wage (USD)',
+        xaxis={'categoryorder': 'total descending'},
         margin={'l': 40, 'b': 40, 't': 40, 'r': 0},
         hovermode='closest'
     )
 
     return fig
+
 
 # Run the app
 if __name__ == '__main__':
