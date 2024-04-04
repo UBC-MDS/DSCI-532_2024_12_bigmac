@@ -309,10 +309,18 @@ def update_time_series(selected_country, selected_year, inflation, currency):
 
 
 @app.callback(
-    Output("buying-power-plot", "figure"), [Input("country-dropdown", "value")]
+    Output("buying-power-plot", "figure"),
+      [
+          Input("country-dropdown", "value"),
+          Input("year-slider", "value"),
+       ]
 )
-def update_buying_power_plot(selected_country):
-    filtered_data = df[df["country"] == selected_country]
+def update_buying_power_plot(selected_country, selected_year):
+    filtered_data = df[
+        (df["country"] == selected_country)
+        & (df["year"] >= selected_year[0])
+        & (df["year"] <= selected_year[1])
+    ]
 
     if filtered_data.empty:
         return go.Figure()
