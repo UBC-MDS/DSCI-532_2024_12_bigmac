@@ -14,12 +14,12 @@ def main():
         & (wage_data["Series"] == "In 2022 constant prices at 2022 USD PPPs")
     ]
 
-    bigmac_prepared = bigmac_data[["name", "year", "local_price", "dollar_price"]].copy()
+    bigmac_prepared = bigmac_data[["name", "year", "local_price", "dollar_price", "dollar_ex"]].copy()
     bigmac_prepared.rename(columns={"name": "country"}, inplace=True)
 
     wage_prepared = wage_data[["Country", "Time", "Value"]].copy()
     wage_prepared.rename(
-        columns={"Country": "country", "Time": "year", "Value": "hourly_wage_usd"},
+        columns={"Country": "country", "Time": "year", "Value": "usd_wage"},
         inplace=True,
     )
 
@@ -34,17 +34,11 @@ def main():
 
     # Calculate 'Big Macs per hour'
     merged_data["bigmacs_per_hour"] = (
-        merged_data["hourly_wage_usd"] / merged_data["dollar_price"]
+        merged_data["usd_wage"] / merged_data["dollar_price"]
     )
 
     # Calculate Inflation
     bigmac_prepared.sort_values(by=["country", "year"], inplace=True)
-
-    # Calculate the year-over-year percentage change in local_price for each country
-    bigmac_prepared["inflation"] = (
-        bigmac_prepared.groupby("country")["local_price"].pct_change() * 100
-    )
-
     # Calculate the adjusted local_price based on the first year in record (2001)
     bigmac_prepared["multiplication_factor"] = bigmac_prepared.groupby("country")["local_price"].pct_change().fillna(0) + 1
     bigmac_prepared['cum_prod'] = bigmac_prepared.groupby('country')['multiplication_factor'].cumprod()
@@ -52,12 +46,13 @@ def main():
     # Merge
     merged_data = pd.merge(
         merged_data,
-        bigmac_prepared[["country", "year", "cum_prod"]],
+        bigmac_prepared[["country", "year", "cum_prod",]],
         on=["country", "year"],
         how="left",
     )
-    merged_data['adjusted_hourly_wage'] = merged_data['hourly_wage_usd'] / merged_data['cum_prod']
-
+    merged_data['adjusted_usd_wage'] = merged_data['usd_wage'] / merged_data['cum_prod']
+    merged_data['local_wage'] = merged_data['dollar_ex'] * merged_data['usd_wage']
+    merged_data['adjusted_local_wage'] = merged_data['dollar_ex'] * merged_data['adjusted_usd_wage']
 
     # Saving the final dataset
     merged_data.to_csv("data/processed/merged_data_with_inflation.csv", index=False)

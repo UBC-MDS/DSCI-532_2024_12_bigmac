@@ -282,14 +282,20 @@ def update_time_series(selected_country, selected_year, inflation, currency):
         & (df["year"] <= selected_year[1])
     ]
 
-    if inflation == "adjust":
-        wage = "adjusted_hourly_wage"
-    else:
-        wage = "hourly_wage_usd"
-
-    if currency == "local":
+    if (inflation == "adjust") & (currency == "local"):
+        wage = 'adjusted_local_wage'
         y_data = "local_price"
-    else:
+
+    elif (inflation == "adjust") & (currency == "USD"):
+        wage = 'adjusted_usd_wage'
+        y_data = "dollar_price"
+
+    elif (inflation == "absolute") & (currency == "local"):
+        wage = 'local_wage'
+        y_data = "local_price"
+
+    else: #  (inflation == "absolute") & (currency == "USD")
+        wage = 'usd_wage'
         y_data = "dollar_price"
 
     fig = px.line(
@@ -351,7 +357,7 @@ def update_minimum_wage_trend(selected_country, selected_year):
         fig.add_trace(
             go.Bar(
                 x=[country],
-                y=filtered_data[filtered_data["country"] == country]["hourly_wage_usd"],
+                y=filtered_data[filtered_data["country"] == country]["usd_wage"],
                 name=country,
                 marker_color="lightslategray"
                 if country != selected_country
