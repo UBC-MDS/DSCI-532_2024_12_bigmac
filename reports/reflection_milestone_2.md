@@ -22,7 +22,8 @@ For example, so far the map's interactivity feature is not operational. We inten
 
 What's more, an immediate area for improvement is the clarification of plot axes and titles. For instance, in the time series plots for Big Mac price and minimum wage, the y-axis will be more intuitive if labeled to reflect what the values represent. Enhancing the clarity of legends is also on our agenda, with labels like "dollar price" and "Adjusted USD wage" to be revised to "Big Mac price in USD" and "Adjusted hourly USD wage," respectively.
 
-Last but not least, we plan to introduce a separate page dedicated to a data table for users interested in specifics. Incorporating detailed data on individual countries' minimum wage trends, adjusting for inflation, and possibly integrating a city-level analysis could offer granular insights. Optimizing our read_json function for faster dashboard performance is also on the horizon.
+Last but not least, we plan to add dynamic narratives, some images, and perhaps incorporate McDonald's colors. We also intend to introduce dynamic filters and possibly add tooltip features for enhanced interactivity. Moreover, we may launch a separate page dedicated to a data table for users interested in specifics. This will involve incorporating detailed data on individual countries' minimum wage trends, making adjustments for inflation, and potentially integrating a city-level analysis for more granular insights. Optimizing our read_json function to improve dashboard performance is another goal on the horizon.
+
 
 ## Conclusion
 
