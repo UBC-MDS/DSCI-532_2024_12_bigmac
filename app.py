@@ -428,6 +428,10 @@ def update_time_series(selected_country, selected_year, inflation, currency):
         filtered_data,
         x="year",
         y=[y_data, wage],
+        labels={
+                "year": "Year",
+                "value": "Value",
+                 },
         title=f"Big Mac Price and Minimum Wage Trends in {selected_country}",
     )
 
