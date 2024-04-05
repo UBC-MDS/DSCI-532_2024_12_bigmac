@@ -15,6 +15,7 @@ df = data_wrangling.main()
 
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 # Define the figure for the global map view
 fig_map = px.choropleth(
