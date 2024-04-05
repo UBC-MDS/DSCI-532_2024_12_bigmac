@@ -48,7 +48,7 @@ We've crafted this tool using Dash to offer a user-friendly and visually compell
 
 ## How to Contribute
 
-Your insights and expertise can help make the Big Mac Index Dashboard even better. For guidelines on contributions, please refer to our [Contributing Guidelines](#) and uphold our [Code of Conduct](#). Whether you're looking to update data, enhance features, or fix bugs, we welcome your involvement!
+Your insights and expertise can help make the Big Mac Index Dashboard even better. For guidelines on contributions, please refer to our [Contributing Guidelines](https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac/blob/main/CONTRIBUTING.md) and uphold our [Code of Conduct](https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac/blob/main/CODE_OF_CONDUCT.md). Whether you're looking to update data, enhance features, or fix bugs, we welcome your involvement!
 
 ## Running the Dashboard Locally
 
