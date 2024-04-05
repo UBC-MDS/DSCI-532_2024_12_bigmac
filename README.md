@@ -49,11 +49,18 @@ Interested in enhancing the Big Mac Index Dashboard? See our [Contributing Guide
 
 ## Running the Dashboard Locally
 
-To run the dashboard locally, ensure you have Dash installed. Clone the repository, navigate to the project directory, and execute:
-
+To run the dashboard locally, clone the repository, navigate to the project directory, and execute:
 ```bash
-python toy_script.py
+conda env create -f environment.yml
 ```
+```bash
+conda activate bigmac_12 
+```
+The above two commands install and activate the necessary environment to run the dashboard locally. After activation, run the following command under the same project directory:
+```bash
+python app.py
+```
+Use the output URL to view the dashboard. The URL has a format like this: http://127.0.0.1:8050/
 
 ## Team
 - Arturo Boquin
