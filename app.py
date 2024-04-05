@@ -304,10 +304,18 @@ app.layout = html.Div(
                                                     html.Div(
                                                         [
                                                             html.H2(
-                                                                "Big Mac Index Dashboard"
+                                                                "Big Mac Index Dashboard",
+                                                                style={"textAlign": "center"},
+                                                            ),
+                                                            html.P(
+                                                                """
+                                                                Inflation measurements within this dashboard derive from variations in Big Mac prices, rather than the Consumer Price Index (CPI). 
+                                                                The concept of buying power is visualized through 'Big Macs per hour'—the number of Big Macs one can purchase with an hour's wage. 
+                                                                This unique approach offers an insightful perspective on economic conditions across different countries.
+                                                                """,
+                                                                style={'marginTop': '10px', 'textAlign': 'center'}  # Ensuring the text is centered and has some space above
                                                             ),
                                                         ],
-                                                        style={"textAlign": "center"},
                                                     )
                                                 ]
                                             )
