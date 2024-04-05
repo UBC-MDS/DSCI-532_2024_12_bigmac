@@ -5,15 +5,11 @@ In our effort to craft a dashboard that elucidates purchasing power parity (PPP)
 
 ## Limitations Identified
 
-During the development, we noticed that the world map's zoom function could overextend, potentially compromising the user's focus. The absence of a "select/deselect all" button in the dropdown menu emerged as a minor inconvenience. A significant challenge was managing plot titles with excessive country listings, prompting us to consider title length restrictions. Moreover, the map's interactivity was limited to displaying only the average price per night, which restrained the depth of information available at a glance.
+We have identified several areas in need of attention. For instance, the world map's zoom function allows for excessive zooming out, which may reduce user engagement. It could also offer greater interactivity, particularly when a user selects a specific country on the map. Moreover, the titles, axes, and lengths of the current plots are somewhat ambiguous, and in some cases, the excessive listing of country names clutters the visual space.
 
 ## Discrepancies Between Proposal and Implementation
 
 Comparing our initial sketch to the final dashboard revealed adaptations. We optimized spatial utility by condensing the number of plots within the chart box from four to three. This decision was driven by implementation constraints and the intent to maintain an uncluttered interface. 
-
-## Acknowledged Bugs and Developmental Features
-
-As of this reflection, the map's interactivity feature is not operational. We intend to address this as our proficiency with the technology grows throughout the course. Recognizing this as a feature under development will help distinguish it from a malfunction.
 
 ## Current Dashboard Strengths and Weaknesses
 
@@ -21,7 +17,12 @@ Our dashboard adeptly leverages visual analytics to communicate complex economic
 
 ## Prospects for Enhancement
 
-Looking ahead, we aim to augment the dashboard with more interactive features. These enhancements include visualizing more dataset attributes. We plan to introduce a separate page dedicated to a data table for users interested in specifics. Incorporating detailed data on individual countries' minimum wage trends, adjusting for inflation, and possibly integrating a city-level analysis could offer granular insights. Optimizing our read_json function for faster dashboard performance is also on the horizon.
+Looking ahead, we aim to augment the dashboard with more interactive features. 
+For example, so far the map's interactivity feature is not operational. We intend to address this as our proficiency with the technology grows throughout the course. Recognizing this as a feature under development will help distinguish it from a malfunction. 
+
+What's more, an immediate area for improvement is the clarification of plot axes and titles. For instance, in the time series plots for Big Mac price and minimum wage, the y-axis will be more intuitive if labeled to reflect what the values represent. Enhancing the clarity of legends is also on our agenda, with labels like "dollar price" and "Adjusted USD wage" to be revised to "Big Mac price in USD" and "Adjusted hourly USD wage," respectively.
+
+Last but not least, we plan to introduce a separate page dedicated to a data table for users interested in specifics. Incorporating detailed data on individual countries' minimum wage trends, adjusting for inflation, and possibly integrating a city-level analysis could offer granular insights. Optimizing our read_json function for faster dashboard performance is also on the horizon.
 
 ## Conclusion
 
