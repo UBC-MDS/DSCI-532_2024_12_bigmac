@@ -61,7 +61,7 @@ conda activate bigmac_12
 ```
 The above two commands install and activate the necessary environment to run the dashboard locally. After activation, run the following command under the same project directory:
 ```bash
-python app.py
+python -m src.app
 ```
 Use the output URL to view the dashboard. The URL has a format like this: http://127.0.0.1:8050/
 
