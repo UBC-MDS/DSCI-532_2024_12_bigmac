@@ -1,5 +1,7 @@
 # Big Mac Dashboard
 
+Welcome to the Big Mac Index Dashboard! Our interactive platform unveils the intricacies of purchasing power and economic trends globally via the famed Big Mac Index and comprehensive minimum wage data.
+
 ## Table of Contents
 
 - [About](#about)
@@ -12,13 +14,14 @@
 
 ## About
 
-**The Big Mac Dashboard** provides interactive visual insights into the purchasing power parity (PPP) and economic trends across the globe using the Big Mac Index and minimum wage data. Aimed at economists, policy makers, financial analysts, and the general public, the dashboard simplifies the understanding of complex economic indicators through engaging and comparative visualizations.
+**The Big Mac Dashboard** is our response to the challenge of making economic data relatable and understandable. By merging the Big Mac Index with minimum wage information, we offer a practical perspective on economic indicators that affect everyday life. Whether you're an economist, policymaker, financial analyst, or a curious learner, our dashboard translates complex data into digestible visual stories.
 
 ![sketch dashboard](https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac/blob/main/img/demo.gif)
 
 ## Use the App
 
-Access the live dashboard [here!](https://dsci-532-2024-12-bigmac.onrender.com/) 
+Dive into the dashboard experience right here. You'll find intuitive controls and visuals that bring economic data to life. Witness the buying power of an hour's wage around the world and explore how it's changed over time. [here!](https://dsci-532-2024-12-bigmac.onrender.com/) 
+Need assistance or want to report an issue? Please open an issue on our GitHub repository, and we'll be happy to help.
 
 ## About the Data
 
@@ -35,17 +38,17 @@ With approximately 1,946 entries, the dataset covers various indicators such as 
 
 **Features include:**
 
-- **Global Map View:** Highlights countries with data, showing the latest Big Mac Index and minimum wage summaries.
-- **Time Series Plots:** Displays Big Mac prices and minimum wage trends in both local currency and USD.
-- **Buying Power Calculator:** Calculates how many Big Macs an hour of minimum wage can buy in selected countries.
+- **Global Map View:** Spot economic trends at a glance. Highlights countries with data, showing the latest Big Mac Index and minimum wage summaries.
+- **Dynamic Time Series Plots:** Track Big Mac price and minimum wage trends in selected country over selected years.
+- **Buying Power Calculator:** Calculates how many Big Macs an hour of minimum wage can buy in the selected country over selected years. 
 - **Inflation Adjustment Toggle:** Adjusts historical prices for inflation.
 - **Currency Conversion Option:** Views prices in local currency or USD.
 
-Developed using Dash, the dashboard aims to make economic data accessible and engaging.
+We've crafted this tool using Dash to offer a user-friendly and visually compelling way to navigate economic data.
 
 ## How to Contribute
 
-Interested in enhancing the Big Mac Index Dashboard? See our [Contributing Guidelines](#). Contributions can range from data updates to feature development. All contributors must adhere to our [Code of Conduct](#).
+Your insights and expertise can help make the Big Mac Index Dashboard even better. For guidelines on contributions, please refer to our [Contributing Guidelines](#) and uphold our [Code of Conduct](#). Whether you're looking to update data, enhance features, or fix bugs, we welcome your involvement!
 
 ## Running the Dashboard Locally
 
