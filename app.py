@@ -220,10 +220,18 @@ app.layout = html.Div(
                                                     html.Div(
                                                         [
                                                             html.H2(
-                                                                "Big Mac Index Dashboard"
+                                                                "Big Mac Index Dashboard",
+                                                                style={"textAlign": "center"},
+                                                            ),
+                                                            html.P(
+                                                                """
+                                                                Inflation measurements within this dashboard derive from variations in Big Mac prices, rather than the Consumer Price Index (CPI). 
+                                                                The concept of buying power is visualized through 'Big Macs per hour'—the number of Big Macs one can purchase with an hour's wage. 
+                                                                This unique approach offers an insightful perspective on economic conditions across different countries.
+                                                                """,
+                                                                style={'marginTop': '10px', 'textAlign': 'center'}  # Ensuring the text is centered and has some space above
                                                             ),
                                                         ],
-                                                        style={"textAlign": "center"},
                                                     )
                                                 ]
                                             )
@@ -309,33 +317,42 @@ def update_time_series(selected_country, selected_year, inflation, currency):
 
 
 @app.callback(
-    Output("buying-power-plot", "figure"), [Input("country-dropdown", "value")]
+    Output("buying-power-plot", "figure"), 
+    [
+        Input("country-dropdown", "value"),
+        Input("year-slider", "value"),
+    ]
 )
-def update_buying_power_plot(selected_country):
-    filtered_data = df[df["country"] == selected_country]
+def update_buying_power_plot(selected_country, selected_year):
+    filtered_data = df[
+        (df["country"] == selected_country) & 
+        (df["year"] >= selected_year[0]) & 
+        (df["year"] <= selected_year[1])
+    ]
+
+    print(f"Filtered Data Length: {len(filtered_data)}") 
 
     if filtered_data.empty:
+        print("Filtered data is empty.") 
         return go.Figure()
 
-    # line plot for buying power over time
     fig = px.line(
         filtered_data,
         x="year",
         y="bigmacs_per_hour",
         title=f"Buying Power Over Time in {selected_country}",
-        # width=400, height=340
     )
 
     fig.update_layout(
         xaxis_title="Year",
         yaxis_title="Big Macs per Hour",
-        # margin={"l": 40, "b": 40, "t": 40, "r": 0},
         hovermode="closest",
     )
 
     fig.update_traces(line=dict(color="RoyalBlue"))
 
     return fig
+
 
 
 @app.callback(
