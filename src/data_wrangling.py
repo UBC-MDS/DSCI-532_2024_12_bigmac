@@ -54,6 +54,16 @@ def main():
     merged_data['local_wage'] = merged_data['dollar_ex'] * merged_data['usd_wage']
     merged_data['adjusted_local_wage'] = merged_data['dollar_ex'] * merged_data['adjusted_usd_wage']
 
+    merged_data.rename(
+            columns={'adjusted_local_wage':'Adjusted local wage', 
+                     'adjusted_usd_wage': 'Adjusted UDS wage', 
+                     'local_price': 'Local price', 
+                     'dollar_price': 'Dollar price',
+                     'local_wage': 'Local wage',
+                     'usd_wage': 'USD wage'
+                     },
+            inplace=True,
+        )
     # Saving the final dataset
     merged_data.to_csv("data/processed/merged_data_with_inflation.csv", index=False)
 
