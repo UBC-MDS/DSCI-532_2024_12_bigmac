@@ -17,9 +17,9 @@ def main():
     bigmac_prepared = bigmac_data[["name", "year", "local_price", "dollar_price", "dollar_ex"]].copy()
     bigmac_prepared.rename(columns={"name": "country"}, inplace=True)
 
-    wage_prepared = wage_data[["Country", "Time", "Value"]].copy()
+    wage_prepared = wage_data[["COUNTRY", "Country", "Time", "Value"]].copy()
     wage_prepared.rename(
-        columns={"Country": "country", "Time": "year", "Value": "usd_wage"},
+        columns={"COUNTRY": "country_code", "Country": "country", "Time": "year", "Value": "usd_wage"},
         inplace=True,
     )
 
