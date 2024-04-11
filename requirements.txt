@@ -76,3 +76,4 @@ Werkzeug==3.0.*
 wheel==0.43.*
 xyzservices==2023.10.*
 zipp==3.17.*
+geopandas== 0.14.*

@@ -17,9 +17,9 @@ def main():
     bigmac_prepared = bigmac_data[["name", "year", "local_price", "dollar_price", "dollar_ex"]].copy()
     bigmac_prepared.rename(columns={"name": "country"}, inplace=True)
 
-    wage_prepared = wage_data[["Country", "Time", "Value"]].copy()
+    wage_prepared = wage_data[["COUNTRY", "Country", "Time", "Value"]].copy()
     wage_prepared.rename(
-        columns={"Country": "country", "Time": "year", "Value": "usd_wage"},
+        columns={"COUNTRY": "country_code", "Country": "country", "Time": "year", "Value": "usd_wage"},
         inplace=True,
     )
 
@@ -55,12 +55,12 @@ def main():
     merged_data['adjusted_local_wage'] = merged_data['dollar_ex'] * merged_data['adjusted_usd_wage']
 
     merged_data.rename(
-            columns={'adjusted_local_wage':'Adjusted local wage', 
-                     'adjusted_usd_wage': 'Adjusted UDS wage', 
-                     'local_price': 'Local price', 
-                     'dollar_price': 'Dollar price',
-                     'local_wage': 'Local wage',
-                     'usd_wage': 'USD wage'
+            columns={'adjusted_local_wage':'Adjusted Wage in Local Currency', 
+                     'adjusted_usd_wage': 'Adjusted Wage in USD', 
+                     'local_price': 'Bigmac Price in Local Currency', 
+                     'dollar_price': 'Bigmac Price in USD',
+                     'local_wage': 'Wage in Local Currency',
+                     'usd_wage': 'Wage in USD'
                      },
             inplace=True,
         )
