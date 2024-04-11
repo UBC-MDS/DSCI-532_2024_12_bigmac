@@ -22,30 +22,11 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 # Text field
-def drawText(text):
-    return html.Div(
-        [
-            dbc.Card(
-                dbc.CardBody(
-                    [
-                        html.Div(
-                            [
-                                html.H5(text),
-                            ],
-                            style={"textAlign": "center"},
-                        )
-                    ]
-                )
-            ),
-        ]
-    )
-
 
 def year_slider():
-    return dbc.Card(
-        dbc.CardBody(
+    return dbc.Container(
             [
-                html.H5("Year Range"),
+                html.H6("Year Range"),
                 html.Div(
                     dcc.RangeSlider(
                         id="year-slider",
@@ -65,21 +46,16 @@ def year_slider():
                 ),
             ],
             style={
-                "margin-left": "5rem",
+                "margin-left": "-4rem",
                 # "margin-right": "2rem",
                 "padding": "2rem 1rem",
             },
-        ),
-        color="light",
-        outline=True,
     )
 
-
 def country_dropdown():
-    return dbc.Card(
-        dbc.CardBody(
+    return dbc.Container(
             [
-                html.H5("Country"),
+                html.H6("Country"),
                 html.Div(
                     dcc.Dropdown(
                         id="country-dropdown",
@@ -91,40 +67,10 @@ def country_dropdown():
                 ),
             ],
             style={
-                # "margin-left": "2rem",
-                # "margin-right": "5rem",
+                "margin-left": "-6rem",
+                "margin-right": "7rem",
                 "padding": "2rem 1rem",
             },
-        ),
-        color="light",
-        outline=True,
-    )
-
-
-def currency_control():
-    return html.Div(
-        [
-            html.H6("Currency: "),
-            # html.Br(),
-            dcc.RadioItems(
-                id="currency-conversion-option",
-                options=[
-                    {
-                        "label": "Local Currency",
-                        "value": "local",
-                    },
-                    {"label": "USD", "value": "USD"},
-                ],
-                value="USD",
-                # inline=True,
-                inputStyle={"margin-right": "10px"},
-            ),
-        ],
-        style={
-            # "margin-left": "2rem",
-            "margin-right": "2rem",
-            "padding": "2rem 0rem",
-        },
     )
 
 
@@ -151,8 +97,34 @@ def inflation_control():
             ),
         ],
         style={
-            "margin-left": "2rem",
-            # "margin-right": "0rem",
+            "margin-left": "10rem",
+            "margin-right": "2rem",
+            "padding": "2rem 0rem",
+        },
+    )
+
+def currency_control():
+    return html.Div(
+        [
+            html.H6("Currency: "),
+            # html.Br(),
+            dcc.RadioItems(
+                id="currency-conversion-option",
+                options=[
+                    {
+                        "label": "Local Currency",
+                        "value": "local",
+                    },
+                    {"label": "USD", "value": "USD"},
+                ],
+                value="USD",
+                # inline=True,
+                inputStyle={"margin-right": "10px"},
+            ),
+        ],
+        style={
+            "margin-left": "3rem",
+            "margin-right": "2rem",
             "padding": "2rem 0rem",
         },
     )
@@ -165,24 +137,26 @@ def key_metrics():
                 html.Div(
                     id="key-metrics",
                     children=[
-                        html.Div(
-                            html.H5("How many Bic Mac can we buy?"),
-                            # style={"textAlign": "center"},
-                        ),
+                        # html.Div(
+                        #     html.H5("How many Bic Mac can we buy?"),
+                        # ),
                         # html.Div(id="big-mac-index-metric"),
                         # html.Div(id="local-currency-metric"),
                         # Buying Power Calculator (Will be updated with callback)
                         dcc.Graph(id="buying-power-plot"),
+                        dcc.Graph(id="minimum-wage-trend"),
                     ],
                 )
             ],
             
         ),
-        # color="light",
+        color="light",
         outline=True,
         style={
+                "height":850,
                 "margin-left": "5rem",
-                "margin-right": "2rem",
+                "margin-right": "1rem",
+                "margin-bottom": "2rem",
                 # "padding": "2rem 1rem",
             },
     )
@@ -190,32 +164,20 @@ def key_metrics():
 
 def global_map():
     # Define the figure for the global map view
-
-    # fig_map = px.choropleth(
-    #     df,
-    #     locations="country",
-    #     locationmode="country names",
-    #     color="bigmacs_per_hour",
-    #     hover_name="country",
-    #     hover_data={"year": True, "bigmacs_per_hour": True, "Dollar price": True},
-    #     projection="natural earth",
-    #     title="Global Big Macs per Hour",
-    #     color_continuous_scale=px.colors.sequential.Plasma,
-    # )
-
-    # fig_map.update_geos(showcountries=True, countrycolor="RebeccaPurple")
-    # fig_map.update_layout(coloraxis_colorbar={"title": "Big Macs/hr"})
-    
     return dbc.Card(
         dbc.CardBody(
-            [dvc.Vega(id='global-map', spec={})],
+            [   html.Br(), 
+                dvc.Vega(id='global-map', spec={})
+                ],
             
         ),
-        # color="light",
+        color="light",
         outline=True,
         style={
-                "margin-top": "2rem",
+                "height":850,
+                # "margin-left": "1rem",
                 "margin-right": "5rem",
+                "margin-bottom": "2rem",
                 # "padding": "2rem 1rem",
             },
     )
@@ -238,12 +200,12 @@ def time_series_plot():
             ],
             
         ),
-        # color="light",
+        color="light",
         outline=True,
         style={
                 "margin-left": "5rem",
-                "margin-right": "2rem",
-                "padding": "2rem 1rem",
+                "margin-right": "1rem",
+                "margin-bottom": "2rem",
             },
     )
 
@@ -257,12 +219,12 @@ def minimum_wage_trend_plot():
                 )
             ]
         ),
-        # color="light",
+        color="light",
         outline=True,
         style={
-                "margin-left": "2rem",
+                "margin-left": "1rem",
                 "margin-right": "5rem",
-                "padding": "2rem 1rem",
+                "margin-bottom": "2rem",
             },
     )
 
@@ -286,10 +248,15 @@ def footer():
             ),
         ],
         style={
+            "width": "100%",
+            "bottom":"0",
+            "text-align": "center",
             "margin-top": "14px",
             "margin-bottom": "0px",
             "font-size": "13px",
             "opacity": "0.6",
+            "background-color": "#EBEBEB",
+            "color":"#2a3f5f",
         },
     )
 
@@ -305,14 +272,13 @@ app.layout = html.Div(
                             dbc.Col(
                                 html.Div(
                                     [
-                                        dbc.Card(
-                                            dbc.CardBody(
-                                                [
-                                                    html.Div(
+                                                    dbc.Container(
                                                         [
                                                             html.H2(
                                                                 "Big Mac Index Dashboard",
-                                                                style={"textAlign": "center"},
+                                                                style={
+                                                                        "textAlign": "center", 
+                                                                       "color": "#2a3f5f",                                                                       },
                                                             ),
                                                             html.P(
                                                                 """
@@ -320,13 +286,15 @@ app.layout = html.Div(
                                                                 The concept of buying power is visualized through 'Big Macs per hour'—the number of Big Macs one can purchase with an hour's wage. 
                                                                 This unique approach offers an insightful perspective on economic conditions across different countries.
                                                                 """,
-                                                                style={'marginTop': '10px', 'textAlign': 'center'}  # Ensuring the text is centered and has some space above
+                                                                style={
+                                                                    'marginTop': '10px', 
+                                                                    'textAlign': 'center',
+                                                                     "color": "#2a3f5f"
+                                                                    }  # Ensuring the text is centered and has some space above
                                                             ),
+                                                            html.Hr()
                                                         ],
                                                     )
-                                                ]
-                                            )
-                                        ),
                                     ]
                                 )
                             )
@@ -336,10 +304,12 @@ app.layout = html.Div(
                     dbc.Row(
                         [
                             dbc.Col(year_slider(), width=5),
-                            dbc.Col(country_dropdown(), width=2),
-                            dbc.Col(inflation_control(), width=3),
-                            dbc.Col(currency_control(), width=2),
-                        ]
+                            dbc.Col(country_dropdown(), width=3),
+                            # dbc.Col(inflation_control(), width=3),
+                            # dbc.Col(currency_control(), width=2),
+                        ],
+                        justify="center",
+                        style={"background-color": "#f3f6fa"}
                     ),
                     # World map & Key Metrics
                     dbc.Row(
@@ -348,14 +318,22 @@ app.layout = html.Div(
                             dbc.Col(global_map(), width=6),
                         ]
                     ),
+                    dbc.Row(
+                        [
+                            dbc.Col(inflation_control(), width=5),
+                            dbc.Col(currency_control(), width=5),
+                        ],
+                        justify="center",
+                        style={"background-color": "#f3f6fa"}
+                    ),
                     # Time Series Plots for Big Mac Price Trend and Minimum Wage Trend
                     dbc.Row(
                         [
-                            dbc.Col(time_series_plot(), width=6),
-                            dbc.Col(
-                                minimum_wage_trend_plot(),
-                                width=6,
-                            ),
+                            dbc.Col(time_series_plot(), width=12),
+                            # dbc.Col(
+                            #     minimum_wage_trend_plot(),
+                            #     width=6,
+                            # ),
                         ]
                     ),
                     footer(),
@@ -377,16 +355,18 @@ def update_global_map(selected_year):
 
     shapefile = 'data/raw/world-administrative-boundaries/world-administrative-boundaries.shp'
     gdf = gpd.read_file(shapefile)
+    gdf.crs = 'EPSG:4326'
 
-    fillna_values = {"country": 'Country not available', "bigmacs_per_hour": 0}
-    df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on = 'country_code', left_on = 'iso3', how='left').fillna(value=fillna_values)
+    # fillna_values = {"country": 'Country not available', "bigmacs_per_hour": 0}
+    df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on = 'country_code', left_on = 'iso3', how='left'
+                                             ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1)
+    # .fillna(value=fillna_values)
 
-    chart = alt.Chart(df_map, width=550, height=367).mark_geoshape().encode(
-            color='bigmacs_per_hour',
-            tooltip=['country', 'bigmacs_per_hour']
-        ).properties(
-            title='Global Big Macs per Hour'
-        )
+    background = alt.Chart(df_map).mark_geoshape(color="lightgrey")
+    chart = background + alt.Chart(df_map, width=600, height=600).mark_geoshape().encode(
+            color=alt.Color('Big Macs per Hour', legend=alt.Legend(orient='bottom-right')),
+            tooltip=['country', 'Big Macs per Hour']
+        ).properties(height=600)
     
     return chart.to_dict(format="vega")
 
@@ -412,8 +392,8 @@ def update_buying_power_plot(selected_country, selected_year):
         filtered_data,
         x="year",
         y="bigmacs_per_hour",
-        title=f"Buying Power Over Time in {selected_country}",
-        width=600,
+        title=f"How many Bic Mac can we buy in {selected_country}?",
+        # width=600,
         height=400,
     )
 
@@ -428,6 +408,46 @@ def update_buying_power_plot(selected_country, selected_year):
 
     return fig
 
+
+@app.callback(
+    Output("minimum-wage-trend", "figure"),
+    [Input("country-dropdown", "value"), Input("year-slider", "value")],
+)
+def update_minimum_wage_trend(selected_country, selected_year):
+    filtered_data = df[
+        (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
+    ].groupby(['country'])[['Wage in USD']].median().reset_index()
+
+    if filtered_data.empty:
+        return go.Figure()
+
+    fig = go.Figure()
+
+    # Add a bar for each country
+    for country in filtered_data["country"].unique():
+        fig.add_trace(
+            go.Bar(
+                x=[country],
+                y=filtered_data[filtered_data["country"] == country]["Wage in USD"],
+                name=country,
+                marker_color="lightslategray"
+                if country != selected_country
+                else "crimson",  # Highlight selected country
+            )
+        )
+
+    # Update the layout
+    fig.update_layout(
+        title=f"Median Hourly Wage from {selected_year[0]} to {selected_year[1]}",
+        xaxis_title="Country",
+        yaxis_title="Hourly Wage (USD)",
+        xaxis={"categoryorder": "total descending"},
+        # margin={"l": 40, "b": 40, "t": 40, "r": 0},
+        hovermode="closest",
+        height=400,
+    )
+
+    return fig
 
 # Callback to update the time series plot
 @app.callback(
@@ -447,20 +467,20 @@ def update_time_series(selected_country, selected_year, inflation, currency):
     ]
 
     if (inflation == "adjust") & (currency == "local"):
-        wage = "Adjusted local wage"
-        y_data = "Local price"
+        wage = "Adjusted Wage in Local Currency"
+        y_data = "Bigmac Price in Local Currency"
 
     elif (inflation == "adjust") & (currency == "USD"):
-        wage = "Adjusted UDS wage"
-        y_data = "Dollar price"
+        wage = "Adjusted Wage in USD"
+        y_data = "Bigmac Price in USD"
 
     elif (inflation == "absolute") & (currency == "local"):
-        wage = "Local wage"
-        y_data = "Local price"
+        wage = "Wage in Local Currency"
+        y_data = "Bigmac Price in Local Currency"
 
     else:  #  (inflation == "absolute") & (currency == "USD")
-        wage = "USD wage"
-        y_data = "Dollar price"
+        wage = "Wage in USD"
+        y_data = "Bigmac Price in USD"
 
     fig = px.line(
         filtered_data,
@@ -468,52 +488,12 @@ def update_time_series(selected_country, selected_year, inflation, currency):
         y=[y_data, wage],
         labels={
                 "year": "Year",
-                "value": "Value",
                  },
         title=f"Big Mac Price and Minimum Wage Trends in {selected_country}",
-    )
+    ).update_yaxes(visible=False)
 
     return fig
 
-
-@app.callback(
-    Output("minimum-wage-trend", "figure"),
-    [Input("country-dropdown", "value"), Input("year-slider", "value")],
-)
-def update_minimum_wage_trend(selected_country, selected_year):
-    filtered_data = df[
-        (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
-    ]
-
-    if filtered_data.empty:
-        return go.Figure()
-
-    fig = go.Figure()
-
-    # Add a bar for each country
-    for country in filtered_data["country"].unique():
-        fig.add_trace(
-            go.Bar(
-                x=[country],
-                y=filtered_data[filtered_data["country"] == country]["USD wage"],
-                name=country,
-                marker_color="lightslategray"
-                if country != selected_country
-                else "crimson",  # Highlight selected country
-            )
-        )
-
-    # Update the layout
-    fig.update_layout(
-        title=f"Hourly Wage (USD) between {selected_year[0]} and {selected_year[1]}",
-        xaxis_title="Country",
-        yaxis_title="Hourly Wage (USD)",
-        xaxis={"categoryorder": "total descending"},
-        margin={"l": 40, "b": 40, "t": 40, "r": 0},
-        hovermode="closest",
-    )
-
-    return fig
 
 
 # Run the app

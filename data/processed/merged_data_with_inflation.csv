@@ -1,4 +1,4 @@
-country,year,Local price,Dollar price,dollar_ex,country_code,USD wage,bigmacs_per_hour,cum_prod,Adjusted UDS wage,Local wage,Adjusted local wage
+country,year,Bigmac Price in Local Currency,Bigmac Price in USD,dollar_ex,country_code,Wage in USD,bigmacs_per_hour,cum_prod,Adjusted Wage in USD,Wage in Local Currency,Adjusted Wage in Local Currency
 Australia,2001,3.0,3.0,1,AUS,11.9840660981339,3.9946886993779667,1.1583011583011584,10.346243731388933,11.9840660981339,10.346243731388933
 Brazil,2001,3.6,1.8,2,BRA,1.16420604616685,0.6467811367593611,1.2203389830508473,0.9540021767200577,2.3284120923337,1.9080043534401154
 Canada,2001,3.33,3.33,1,CAN,7.97220992566682,2.394057034734781,1.168421052631579,6.823062548994125,7.97220992566682,6.823062548994125
