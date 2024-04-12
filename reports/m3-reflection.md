@@ -14,15 +14,15 @@ We significantly enhanced the overall design in terms of layout and clarity.
 
 ### Specific Adjustment:
 
-Title and Legends: Improved the clarity of titles and legends to accurately reflect the data presented (e.g., specifying whether the wage is hourly or annual). Updated legends to reflect changes based on user selections (e.g., currency type).
+**Title and Legends**: Improved the clarity of titles and legends to accurately reflect the data presented (e.g., specifying whether the wage is hourly or annual). Updated legends to reflect changes based on user selections (e.g., currency type).
 
-Map Interaction: Highlighted the selected country on the map using visual cues like borders, shadows, or color changes. We are considering implementing zoom and pan functionality for the map in a future iteration.
+**Map Interaction**: Highlighted the selected country on the map using visual cues like borders, shadows, or color changes. We are considering implementing zoom and pan functionality for the map in a future iteration.
 
-Currency and Inflation:  Moved the currency selection radio button closer to the chart it affects and clarified how inflation adjustment impacts the data.
+**Currency and Inflation**:  Moved the currency selection radio button closer to the chart it affects and clarified how inflation adjustment impacts the data.
 
-Layout and Organization: Adjusted the layout so that charts and controls are aligned in clear columns for better organization. We are considering adding a sidebar or control panel for user selections in a future iteration. 
+**Layout and Organization**: Adjusted the layout so that charts and controls are aligned in clear columns for better organization. We are considering adding a sidebar or control panel for user selections in a future iteration. 
 
-Data Representation: Explored using median wage instead of average wage for better representation and to avoid outliers. We are considering allowing multi-country selection in future iterations to assess its impact on each chart's functionality.
+**Data Representation**: Explored using median wage instead of average wage for better representation and to avoid outliers. We are considering allowing multi-country selection in future iterations to assess its impact on each chart's functionality.
 
 ### Challenging part: Peer Inspiration from group 22
 
