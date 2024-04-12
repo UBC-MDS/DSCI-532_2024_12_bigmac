@@ -9,14 +9,19 @@ Brotli==1.1.*
 certifi==2024.2.*
 charset-normalizer==3.3.*
 click==8.1.*
+click-plugins==1.1.*
+cligj==0.7.*
 comm==0.2.*
 dash==2.16.*
 dash-bootstrap-components==1.5.*
+dash-vega-components==0.10.*
 debugpy==1.8.*
 decorator==5.1.*
 exceptiongroup==1.2.*
 executing==2.0.*
+fiona==1.9.*
 Flask==3.0.*
+geopandas==0.14.*
 idna==3.6.*
 importlib_metadata==7.1.*
 importlib_resources==6.4.*
@@ -50,6 +55,7 @@ ptyprocess==0.7.*
 pure-eval==0.2.*
 pyarrow==15.0.*
 Pygments==2.17.*
+pyproj==3.6.*
 PySocks==1.7.*
 python-dateutil==2.9.*
 pytz==2024.1.*
@@ -59,13 +65,14 @@ requests==2.31.*
 retrying==1.3.*
 rpds-py==0.18.*
 setuptools==69.2.*
+shapely==2.0.*
 six==1.16.*
 stack-data==0.6.*
 tenacity==8.2.*
 toolz==0.12.*
 tornado==6.4.*
 traitlets==5.14.*
-typing_extensions==4.10.*
+typing_extensions==4.11.*
 tzdata==2024.1.*
 urllib3==2.2.*
 vegafusion==1.6.*
@@ -74,6 +81,5 @@ vl-convert-python==1.3.*
 wcwidth==0.2.*
 Werkzeug==3.0.*
 wheel==0.43.*
-xyzservices==2023.10.*
+xyzservices==2024.4.*
 zipp==3.17.*
-geopandas== 0.14.*
