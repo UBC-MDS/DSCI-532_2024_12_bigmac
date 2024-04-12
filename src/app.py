@@ -458,6 +458,7 @@ def update_minimum_wage_trend(selected_country, selected_year):
         # margin={"l": 40, "b": 40, "t": 40, "r": 0},
         hovermode="closest",
         height=400,
+        showlegend=False
     )
 
     return fig
