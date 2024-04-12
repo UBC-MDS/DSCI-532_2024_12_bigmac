@@ -346,9 +346,9 @@ app.layout = html.Div(
 
 @app.callback(
     Output("global-map", "spec"),
-    [Input("year-slider", "value")],
+    [Input("year-slider", "value"), Input("country-dropdown", "value")]
 )
-def update_global_map(selected_year):
+def update_global_map(selected_year, selected_country):
     filtered_data = df[
         (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
     ].groupby(['country_code', 'country'])[['bigmacs_per_hour']].mean().reset_index()
@@ -357,18 +357,26 @@ def update_global_map(selected_year):
     gdf = gpd.read_file(shapefile)
     gdf.crs = 'EPSG:4326'
 
-    # fillna_values = {"country": 'Country not available', "bigmacs_per_hour": 0}
-    df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on = 'country_code', left_on = 'iso3', how='left'
+    df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on='country_code', left_on='iso3', how='left'
                                              ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1)
-    # .fillna(value=fillna_values)
-
+    
     background = alt.Chart(df_map).mark_geoshape(color="lightgrey")
-    chart = background + alt.Chart(df_map, width=600, height=600).mark_geoshape().encode(
+    chart_map = background + alt.Chart(df_map, width=600, height=600).mark_geoshape().encode(
             color=alt.Color('Big Macs per Hour', legend=alt.Legend(orient='bottom-right')),
             tooltip=['country', 'Big Macs per Hour']
         ).properties(height=600)
+
+    highlight = chart_map + alt.Chart(df_map).mark_geoshape(
+        fill=None,
+        stroke='red',
+        strokeWidth=0.5
+    ).transform_filter(
+        alt.FieldEqualPredicate(field='country', equal=selected_country)
+    )
     
-    return chart.to_dict(format="vega")
+    return (highlight).to_dict(format="vega")
+
+
 
 @app.callback(
     Output("buying-power-plot", "figure"),
