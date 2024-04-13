@@ -9,7 +9,7 @@ from datetime import datetime
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-import data_wrangling
+from src import data_wrangling
 import geopandas as gpd
 import altair as alt
 alt.data_transformers.enable('vegafusion')
@@ -520,4 +520,4 @@ def update_time_series(selected_country, selected_year, inflation, currency):
 
 # Run the app
 if __name__ == "__main__":
-    app.run_server(debug=True, host="127.0.0.1")
+    app.run_server(debug=False, host="127.0.0.1")
