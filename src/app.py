@@ -9,7 +9,7 @@ from datetime import datetime
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-import data_wrangling
+from src import data_wrangling
 import geopandas as gpd
 import altair as alt
 alt.data_transformers.enable('vegafusion')
