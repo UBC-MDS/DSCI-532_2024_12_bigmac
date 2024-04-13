@@ -452,7 +452,6 @@ def update_minimum_wage_trend(selected_country, selected_year):
     # Update the layout
     fig.update_layout(
         title=f"Median Hourly Wage from {selected_year[0]} to {selected_year[1]}",
-        xaxis_title="Country",
         yaxis_title="Hourly Wage (USD)",
         xaxis={"categoryorder": "total descending"},
         # margin={"l": 40, "b": 40, "t": 40, "r": 0},
