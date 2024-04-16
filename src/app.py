@@ -9,8 +9,8 @@ from datetime import datetime
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-from src import data_wrangling
-# import data_wrangling
+# from src import data_wrangling
+import data_wrangling
 import altair as alt
 alt.data_transformers.enable('vegafusion')
 
@@ -225,7 +225,7 @@ def minimum_wage_trend_plot():
         color="light",
         outline=True,
         style={
-            "margin-left": "1rem",
+            "margin-left": "10rem",
             "margin-right": "5rem",
             "margin-bottom": "2rem",
         },
@@ -531,6 +531,7 @@ def update_time_series(selected_country, selected_year, inflation, currency):
             wage: y_label
         },
         title=f"Big Mac Price and Minimum Wage Trends in {selected_country}",
+        width=800
     )
 
     fig.update_yaxes(visible=True, title_text=y_label)
