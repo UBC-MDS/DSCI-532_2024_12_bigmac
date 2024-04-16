@@ -2,8 +2,8 @@ import pandas as pd
 import geopandas as gpd
 
 def bigmac():
-    bigmac_data = pd.read_csv("data/raw/bigmac_price.csv")
-    wage_data = pd.read_csv("data/raw/wage.csv")
+    bigmac_data = pd.read_parquet("data/raw/bigmac_price.parquet")
+    wage_data = pd.read_parquet("data/raw/wage.parquet")
 
     # Data Wrangling
 
@@ -66,7 +66,7 @@ def bigmac():
             inplace=True,
         )
     # Saving the final dataset
-    merged_data.to_csv("data/processed/merged_data_with_inflation.csv", index=False)
+    # merged_data.to_parquet("data/processed/merged_data_with_inflation.parquet", index=False)
 
     return merged_data
 
