@@ -9,7 +9,8 @@ from datetime import datetime
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-from src import data_wrangling
+# from src import data_wrangling
+import data_wrangling
 import geopandas as gpd
 import altair as alt
 alt.data_transformers.enable('vegafusion')
@@ -362,24 +363,27 @@ def update_global_map(selected_year, selected_country):
     gdf.crs = 'EPSG:4326'
 
     df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on='country_code', left_on='iso3', how='left'
-                                             ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1)
-
+                                             ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1
+                                                      )[['Big Macs per Hour', 'country', 'geometry']]
+    print(df_map.shape)
     background = alt.Chart(df_map).mark_geoshape(color="lightgrey")
     chart_map = background + alt.Chart(df_map, width=600, height=600).mark_geoshape().encode(
         color=alt.Color('Big Macs per Hour',
                         legend=alt.Legend(orient='bottom-right')),
-        tooltip=['country', 'Big Macs per Hour']
+        tooltip=['country', 'Big Macs per Hour'],
+        stroke=alt.condition(f"datum.country == '{selected_country}'", alt.value('red'), alt.value('white'))
     ).properties(height=600)
 
-    highlight = chart_map + alt.Chart(df_map).mark_geoshape(
-        fill=None,
-        stroke='red',
-        strokeWidth=0.5
-    ).transform_filter(
-        alt.FieldEqualPredicate(field='country', equal=selected_country)
-    )
-
-    return (highlight).to_dict(format="vega")
+    # highlight = chart_map + alt.Chart(df_map).mark_geoshape(
+    #     fill=None,
+    #     stroke='red',
+    #     strokeWidth=0.5
+    # ).transform_filter(
+    #     alt.FieldEqualPredicate(field='country', equal=selected_country)
+    # )
+# 
+    # return (highlight).to_dict(format="vega")
+    return chart_map.to_dict(format='vega')
 
 
 @app.callback(
@@ -520,4 +524,4 @@ def update_time_series(selected_country, selected_year, inflation, currency):
 
 # Run the app
 if __name__ == "__main__":
-    app.run_server(debug=False, host="127.0.0.1")
+    app.run_server(debug=True, host="127.0.0.1")
