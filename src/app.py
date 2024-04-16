@@ -10,19 +10,16 @@ from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from src import data_wrangling
-import geopandas as gpd
 import altair as alt
 alt.data_transformers.enable('vegafusion')
 
-df = data_wrangling.main()
-# pd.read_csv('data/processed/merged_data_with_inflation.csv')
+# Data loading
+df = data_wrangling.bigmac()
+gdf = data_wrangling.geo()
 
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
-
-# Text field
-
 
 def year_slider():
     return dbc.Container(
@@ -356,10 +353,6 @@ def update_global_map(selected_year, selected_country):
     filtered_data = df[
         (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
     ].groupby(['country_code', 'country'])[['bigmacs_per_hour']].mean().reset_index()
-
-    shapefile = 'data/raw/world-administrative-boundaries/world-administrative-boundaries.shp'
-    gdf = gpd.read_file(shapefile)
-    gdf.crs = 'EPSG:4326'
 
     df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on='country_code', left_on='iso3', how='left'
                                              ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1)
