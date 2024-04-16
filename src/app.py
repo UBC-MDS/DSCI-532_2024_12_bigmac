@@ -315,7 +315,7 @@ app.layout = html.Div(
                     dbc.Row(
                         [
                             dbc.Col(key_metrics(), width=6),
-                            dbc.Col(global_map(), width=6),
+                            # dbc.Col(global_map(), width=6),
                         ]
                     ),
                     dbc.Row(
