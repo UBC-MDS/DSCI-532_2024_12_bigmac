@@ -16,6 +16,10 @@ import altair as alt
 alt.data_transformers.enable('vegafusion')
 
 df = data_wrangling.main()
+
+shapefile = 'data/raw/world-administrative-boundaries/world-administrative-boundaries.shp'
+gdf = gpd.read_file(shapefile)
+gdf.crs = 'EPSG:4326'
 # pd.read_csv('data/processed/merged_data_with_inflation.csv')
 
 # Initialize the Dash app
@@ -358,14 +362,11 @@ def update_global_map(selected_year, selected_country):
         (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
     ].groupby(['country_code', 'country'])[['bigmacs_per_hour']].mean().reset_index()
 
-    shapefile = 'data/raw/world-administrative-boundaries/world-administrative-boundaries.shp'
-    gdf = gpd.read_file(shapefile)
-    gdf.crs = 'EPSG:4326'
-
     df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on='country_code', left_on='iso3', how='left'
                                              ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1
                                                       )[['Big Macs per Hour', 'country', 'geometry']]
 
+    alt.renderers.enable('svg')
     background = alt.Chart(df_map).mark_geoshape(color="lightgrey")
     chart_map = background + alt.Chart(df_map, width=600, height=600).mark_geoshape().encode(
         color=alt.Color('Big Macs per Hour',
@@ -373,7 +374,7 @@ def update_global_map(selected_year, selected_country):
         tooltip=['country', 'Big Macs per Hour'],
         stroke=alt.condition(f"datum.country == '{selected_country}'", alt.value('red'), alt.value('white'))
     ).properties(height=600)
-
+    
     return chart_map.to_dict(format='vega')
 
 
