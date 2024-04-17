@@ -9,8 +9,8 @@ from datetime import datetime
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-# from src import data_wrangling
-import data_wrangling
+from src import data_wrangling
+# import data_wrangling
 import altair as alt
 alt.data_transformers.enable('vegafusion')
 
@@ -146,7 +146,7 @@ def key_metrics():
                         # html.Div(id="local-currency-metric"),
                         # Buying Power Calculator (Will be updated with callback)
                         dcc.Graph(id="buying-power-plot"),
-                        dcc.Graph(id="minimum-wage-trend"),
+                        # dcc.Graph(id="minimum-wage-trend"),
                     ],
                 )
             ],
@@ -155,14 +155,13 @@ def key_metrics():
         color="light",
         outline=True,
         style={
-            "height": 850,
+            # "height": 850,
             "margin-left": "5rem",
             "margin-right": "1rem",
             "margin-bottom": "2rem",
             # "padding": "2rem 1rem",
         },
     )
-
 
 def global_map():
     # Define the figure for the global map view
@@ -177,14 +176,31 @@ def global_map():
         color="light",
         outline=True,
         style={
-            "height": 850,
-            # "margin-left": "1rem",
+            # "height": 850,
+            "margin-left": "5rem",
             "margin-right": "5rem",
             "margin-bottom": "2rem",
             # "padding": "2rem 1rem",
         },
     )
 
+def minimum_wage_trend_plot():
+    return dbc.Card(
+        dbc.CardBody(
+            [
+                dcc.Graph(
+                    id="minimum-wage-trend",
+                )
+            ]
+        ),
+        color="light",
+        outline=True,
+        style={
+            "margin-left": "1rem",
+            "margin-right": "5rem",
+            "margin-bottom": "2rem",
+        },
+    )
 
 def time_series_plot():
     return dbc.Card(
@@ -208,25 +224,6 @@ def time_series_plot():
         style={
             "margin-left": "5rem",
             "margin-right": "1rem",
-            "margin-bottom": "2rem",
-        },
-    )
-
-
-def minimum_wage_trend_plot():
-    return dbc.Card(
-        dbc.CardBody(
-            [
-                dcc.Graph(
-                    id="minimum-wage-trend",
-                )
-            ]
-        ),
-        color="light",
-        outline=True,
-        style={
-            "margin-left": "10rem",
-            "margin-right": "5rem",
             "margin-bottom": "2rem",
         },
     )
@@ -317,8 +314,14 @@ app.layout = html.Div(
                     # World map & Key Metrics
                     dbc.Row(
                         [
+                            # dbc.Col(key_metrics(), width=6),
+                            dbc.Col(global_map(), width=12),
+                        ]
+                    ),
+                    dbc.Row(
+                        [
                             dbc.Col(key_metrics(), width=6),
-                            dbc.Col(global_map(), width=6),
+                            dbc.Col(minimum_wage_trend_plot(), width=6),
                         ]
                     ),
                     dbc.Row(
@@ -361,30 +364,13 @@ def update_global_map(selected_year, selected_country):
     df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on='country_code', left_on='iso3', how='left'
                                              ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1)
 
-    # background = alt.Chart(df_map).mark_geoshape(color="lightgrey")
-    # chart_map = background + alt.Chart(df_map, width=600, height=600).mark_geoshape().encode(
-    #     color=alt.Color('Big Macs per Hour',
-    #                     legend=alt.Legend(orient='bottom-right')),
-    #     tooltip=['country', 'Big Macs per Hour']
-    # ).properties(height=600)
-
-    # highlight = chart_map + alt.Chart(df_map).mark_geoshape(
-    #     fill=None,
-    #     stroke='red',
-    #     strokeWidth=0.5
-    # ).transform_filter(
-    #     alt.FieldEqualPredicate(field='country', equal=selected_country)
-    # )
-
-    # return (highlight).to_dict(format="vega")
-
     fig_map = px.choropleth(filtered_data,
                             locations="country",
                             locationmode="country names",
                             color="bigmacs_per_hour",
                             hover_name="country",
                             hover_data={"bigmacs_per_hour": True},
-                            projection="miller",
+                            projection="cylindrical equal area",
                             title="Global Big Macs per Hour",
                             color_continuous_scale=px.colors.sequential.Plasma,
                             )
