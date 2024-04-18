@@ -139,14 +139,7 @@ def key_metrics():
                 html.Div(
                     id="key-metrics",
                     children=[
-                        # html.Div(
-                        #     html.H5("How many Bic Mac can we buy?"),
-                        # ),
-                        # html.Div(id="big-mac-index-metric"),
-                        # html.Div(id="local-currency-metric"),
-                        # Buying Power Calculator (Will be updated with callback)
                         dcc.Graph(id="buying-power-plot"),
-                        # dcc.Graph(id="minimum-wage-trend"),
                     ],
                 )
             ],
@@ -222,8 +215,8 @@ def time_series_plot():
         color="light",
         outline=True,
         style={
-            "margin-left": "5rem",
-            "margin-right": "1rem",
+            "margin-left": "-3rem",
+            "margin-right": "0rem",
             "margin-bottom": "2rem",
         },
     )
@@ -335,12 +328,13 @@ app.layout = html.Div(
                     # Time Series Plots for Big Mac Price Trend and Minimum Wage Trend
                     dbc.Row(
                         [
-                            dbc.Col(time_series_plot(), width=12),
+                            dbc.Col(time_series_plot(), width=6),
                             # dbc.Col(
                             #     minimum_wage_trend_plot(),
                             #     width=6,
                             # ),
-                        ]
+                        ],
+                        justify="center",
                     ),
                     footer(),
                 ]
@@ -527,4 +521,4 @@ def update_time_series(selected_country, selected_year, inflation, currency):
 
 # Run the app
 if __name__ == "__main__":
-    app.run_server(debug=True, host="127.0.0.1")
+    app.run_server(debug=False, host="127.0.0.1")
