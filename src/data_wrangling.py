@@ -1,8 +1,9 @@
 import pandas as pd
+import geopandas as gpd
 
-def main():
-    bigmac_data = pd.read_csv("data/raw/bigmac_price.csv")
-    wage_data = pd.read_csv("data/raw/wage.csv")
+def bigmac():
+    bigmac_data = pd.read_parquet("data/raw/bigmac_price.parquet")
+    wage_data = pd.read_parquet("data/raw/wage.parquet")
 
     # Data Wrangling
 
@@ -65,6 +66,12 @@ def main():
             inplace=True,
         )
     # Saving the final dataset
-    merged_data.to_csv("data/processed/merged_data_with_inflation.csv", index=False)
+    # merged_data.to_parquet("data/processed/merged_data_with_inflation.parquet", index=False)
 
     return merged_data
+
+def geo():
+    shapefile = 'data/raw/world-administrative-boundaries/world-administrative-boundaries.shp'
+    gdf = gpd.read_file(shapefile)
+    gdf.crs = 'EPSG:4326'
+    return gdf
