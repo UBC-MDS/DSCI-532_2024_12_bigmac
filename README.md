@@ -38,11 +38,10 @@ With approximately 1,946 entries, the dataset covers various indicators such as 
 
 **Features include:**
 
-- **Global Map View:** Spot economic trends at a glance. Highlights countries with data, showing the latest Big Mac Index and minimum wage summaries.
-- **Dynamic Time Series Plots:** Track Big Mac price and minimum wage trends in selected country over selected years.
-- **Buying Power Calculator:** Calculates how many Big Macs an hour of minimum wage can buy in the selected country over selected years. 
-- **Inflation Adjustment Toggle:** Adjusts historical prices for inflation.
-- **Currency Conversion Option:** Views prices in local currency or USD.
+- **Global Map** to show the big mac per hour in different countries. I used color density to indicate the levels of big mac per hour by countries so that ppl can have a clear understanding of global economic purchasing power comparison at a glance.
+- **Time Series** Plots of Big Mac per hour in selected country over selected years to show the change in purchasing power of a specific country.
+- **Time series plot** of big mac price and minimum wage trend of select country over selected year.
+- **Bar Chart of Medium** hourly wage in USD across countries in selected time period to compare the wage level across countries.
 
 We've crafted this tool using Dash to offer a user-friendly and visually compelling way to navigate economic data.
 
