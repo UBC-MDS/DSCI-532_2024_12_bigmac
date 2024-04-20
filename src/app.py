@@ -230,13 +230,16 @@ def footer():
             ),
             html.P(
                 [
-                    "Authors: Arturo Boquin, Atabak Alishiri, Beth Ou Yang, Nicole Tu",
+                    "Authors: ",
+                    html.A("Arturo Boquin", href="https://github.com/arturoboquin", target="_blank"),
+                    ", ",
+                    html.A("Atabak Alishiri", href="https://github.com/atabak-alishiri", target="_blank"),
+                    ", ",
+                    html.A("Beth Ou Yang", href="https://github.com/beth-ouyang", target="_blank"),
+                    ", ",
+                    html.A("Nicole Tu", href="https://github.com/Nicole-Tu97", target="_blank"),
                     html.Br(),
-                    html.A(
-                        "Github Repo",
-                        href="https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac",
-                        target="_blank",
-                    ),
+                    html.A("Github Repo", href="https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac", target="_blank"),
                 ]
             ),
         ],
@@ -252,6 +255,7 @@ def footer():
             "color": "#2a3f5f",
         },
     )
+
 
 
 app.layout = html.Div(
