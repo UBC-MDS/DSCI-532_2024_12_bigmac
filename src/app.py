@@ -2,6 +2,7 @@ import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
 import dash_vega_components as dvc
+from flask_caching import Cache
 
 import pandas as pd
 import plotly.express as px
@@ -22,6 +23,18 @@ gdf = data_wrangling.geo()
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
+
+# Configure cache
+cache = Cache(app.server, config={
+    'CACHE_TYPE': 'simple'
+})
+
+@cache.memoize(timeout=60)  # Caches the output for 60 seconds
+def get_filtered_data(selected_year, selected_country):
+    filtered_data = df[
+        (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
+    ].groupby(['country_code', 'country'])[['bigmacs_per_hour']].mean().reset_index()
+    return filtered_data
 
 def year_slider():
     return dbc.Container(
@@ -350,15 +363,11 @@ app.layout = html.Div(
 
 
 @app.callback(
-    # Output("global-map", "spec"),
     Output("global-map", "figure"),
     [Input("year-slider", "value"), Input("country-dropdown", "value")]
 )
 def update_global_map(selected_year, selected_country):
-    filtered_data = df[
-        (df["year"] >= selected_year[0]) & (df["year"] <= selected_year[1])
-    ].groupby(['country_code', 'country'])[['bigmacs_per_hour']].mean().reset_index()
-
+    filtered_data = get_filtered_data(selected_year, selected_country)
     df_map = gdf[['iso3', 'geometry']].merge(filtered_data, right_on='country_code', left_on='iso3', how='left'
                                              ).rename({'bigmacs_per_hour': 'Big Macs per Hour'}, axis=1)
 
