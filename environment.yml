@@ -7,6 +7,8 @@ dependencies:
     - altair-all
     - dash
     - dash-bootstrap-components
+    - geopandas
+    - flask
     - plotly
     - r-base
     - r-tidyverse
