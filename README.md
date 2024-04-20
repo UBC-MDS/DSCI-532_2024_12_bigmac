@@ -16,7 +16,8 @@ Welcome to the Big Mac Index Dashboard! Our interactive platform unveils the int
 
 **The Big Mac Dashboard** is our response to the challenge of making economic data relatable and understandable. By merging the Big Mac Index with minimum wage information, we offer a practical perspective on economic indicators that affect everyday life. Whether you're an economist, policymaker, financial analyst, or a curious learner, our dashboard translates complex data into digestible visual stories.
 
-![sketch dashboard](https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac/blob/Nicole-Tu97-update-GIF/img/Untitled%20video%20-%20Made%20with%20Clipchamp%20(2).gif)
+<img src="img/demo.gif" style="width: 100%;">
+
 
 ## Use the App
 
