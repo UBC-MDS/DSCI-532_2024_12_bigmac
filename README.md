@@ -2,6 +2,10 @@
 
 Welcome to the Big Mac Index Dashboard! Our interactive platform unveils the intricacies of purchasing power and economic trends globally via the famed Big Mac Index and comprehensive minimum wage data.
 
+<div style="text-align: center; width: 100%;">
+    <img src="img/burger.jpg" style="width: 100%;">
+</div>
+
 ## Table of Contents
 
 - [About](#about)
@@ -16,7 +20,9 @@ Welcome to the Big Mac Index Dashboard! Our interactive platform unveils the int
 
 **The Big Mac Dashboard** is our response to the challenge of making economic data relatable and understandable. By merging the Big Mac Index with minimum wage information, we offer a practical perspective on economic indicators that affect everyday life. Whether you're an economist, policymaker, financial analyst, or a curious learner, our dashboard translates complex data into digestible visual stories.
 
-![sketch dashboard](https://github.com/UBC-MDS/DSCI-532_2024_12_bigmac/blob/Nicole-Tu97-update-GIF/img/Untitled%20video%20-%20Made%20with%20Clipchamp%20(2).gif)
+<div style="display: flex; justify-content: center; width: 100%;">
+    <img src="img/demo.gif" style="width: 100%;">
+</div>
 
 ## Use the App
 
@@ -65,7 +71,9 @@ python -m src.app
 Use the output URL to view the dashboard. The URL has a format like this: http://127.0.0.1:8050/
 
 ## Team
-- Arturo Boquin
-- Atabak Alishiri
-- Beth Ou Yang
-- Nicole Tu
+
+- [Arturo Boquin](https://github.com/arturoboquin)
+- [Atabak Alishiri](https://github.com/atabak-alishiri)
+- [Beth Ou Yang](https://github.com/beth-ouyang)
+- [Nicole Tu](https://github.com/Nicole-Tu97)
+
