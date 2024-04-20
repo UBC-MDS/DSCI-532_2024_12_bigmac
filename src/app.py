@@ -348,6 +348,7 @@ app.layout = html.Div(
                         ],
                         justify="center",
                     ),
+                    scroll_hint(),
                     footer(),
                 ]
             ),
