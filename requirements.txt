@@ -83,3 +83,4 @@ Werkzeug==3.0.*
 wheel==0.43.*
 xyzservices==2024.4.*
 zipp==3.17.*
+flask-caching==2.1.*
