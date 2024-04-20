@@ -23,6 +23,14 @@ gdf = data_wrangling.geo()
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
+def scroll_hint():
+    return dbc.Card(
+        html.P("Scroll for more", className="text-center"),
+        body=True,
+        className="sticky-bottom mb-2",
+        style={'backgroundColor': '#f8f9fa', 'opacity': '0.7'}
+    )
+
 def year_slider():
     return dbc.Container(
         [
