@@ -2,6 +2,10 @@
 
 Welcome to the Big Mac Index Dashboard! Our interactive platform unveils the intricacies of purchasing power and economic trends globally via the famed Big Mac Index and comprehensive minimum wage data.
 
+<div style="text-align: center; width: 100%;">
+    <img src="img/burger.jpg" style="width: 100%;">
+</div>
+
 ## Table of Contents
 
 - [About](#about)
