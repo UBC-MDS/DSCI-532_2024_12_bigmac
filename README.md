@@ -71,7 +71,9 @@ python -m src.app
 Use the output URL to view the dashboard. The URL has a format like this: http://127.0.0.1:8050/
 
 ## Team
-- Arturo Boquin
-- Atabak Alishiri
-- Beth Ou Yang
-- Nicole Tu
+
+- [Arturo Boquin](https://github.com/arturoboquin)
+- [Atabak Alishiri](https://github.com/atabak-alishiri)
+- [Beth Ou Yang](https://github.com/beth-ouyang)
+- [Nicole Tu](https://github.com/Nicole-Tu97)
+
