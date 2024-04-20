@@ -207,7 +207,7 @@ def time_series_plot():
                 # ),
                 dcc.Graph(
                     id="time-series-plot",
-                    # style={"display": "inline-block"},
+                    style={"display": "block", "margin": "auto"}
                 ),
             ],
 
@@ -511,10 +511,11 @@ def update_time_series(selected_country, selected_year, inflation, currency):
             wage: y_label
         },
         title=f"Big Mac Price and Minimum Wage Trends in {selected_country}",
-        width=800
+        width=900
     )
 
     fig.update_yaxes(visible=True, title_text=y_label)
+    fig.update_layout(showlegend=False)
 
     return fig
 
