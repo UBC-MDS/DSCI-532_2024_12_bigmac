@@ -1,4 +1,4 @@
-# Milestone 3 Reflection
+# Milestone 4 Reflection
 
 ## Features Implemented:
 
@@ -6,11 +6,11 @@ In response to the feedback and recommendations gathered from our peers and stak
 
 ### Enhancements Implemented:
 
-1. **Map Interaction:** We addressed the issue of limited interactivity by introducing a more intuitive map interaction feature. Users can now select specific countries directly on the map, triggering dynamic updates to the displayed data. Visual cues such as borders, shadows, or color changes highlight the selected country, enhancing user engagement and facilitating data exploration.
+1. **Map Interaction:** We addressed the issue of limited interactivity by introducing a more intuitive map interaction feature. Users can now select specific countries directly on the map, triggering dynamic updates to the displayed data. Visual cues such as borders, shadows, or color changes highlight the selected country, enhancing user engagement and facilitating data exploration. Additionally, we added caching to our map as one of the requirements of the milestone, improving performance and user experience.
 
 2. **Title and Legends Clarity:** To improve clarity and ensure accurate interpretation of the data, we revamped the titles and legends throughout the dashboard. Clear, descriptive titles now accompany each chart, providing context and guiding users in their analysis. Legends have been updated to reflect changes based on user selections, such as currency type or inflation adjustments.
 
-3. **Layout and Organization:** We restructured the layout of the dashboard to enhance organization and streamline user navigation. Charts and controls are now aligned in clear columns, improving readability and usability. The addition of a sidebar or control panel for user selections further enhances the overall user experience, making it easier for users to interact with the dashboard.
+3. **Layout and Organization:** We restructured the layout of the dashboard to enhance organization and streamline user navigation. Charts and controls are now aligned in clear columns, improving readability and usability. The addition of a sidebar or control panel for user selections further enhances the overall user experience, making it easier for users to interact with the dashboard. Additionally, in response to Joel's feedback, we added a visual aid to help people know they need to scroll down, further improving user engagement.
 
 4. **Data Representation:** Building on peer inspiration and best practices, we explored the use of median wage instead of average wage for better data representation. This adjustment helps mitigate the impact of outliers and provides users with a more accurate understanding of wage trends.
 
@@ -32,4 +32,5 @@ While the current iteration of the dashboard represents a significant improvemen
 
 ## Conclusion:
 
-In conclusion, the updated dashboard represents a significant step forward in terms of usability, clarity, and interactivity. By incorporating user feedback and best practices, we have created a more intuitive and informative tool for exploring economic trends through the Big Mac Index. We remain committed to ongoing improvement and look forward to incorporating further enhancements based on user feedback and evolving needs.
+In conclusion, the updated dashboard represents a significant step forward in terms of usability, clarity, and interactivity. By incorporating user feedback and best practices, we have created a more intuitive and informative tool for exploring economic trends through the Big Mac Index. We remain committed to ongoing improvement and look forward to incorporating further enhancements based on user feedback and evolving needs. Additionally, we have updated the README with a new GIF, an image, and links to our GitHub accounts, as well as added links to the footer as part of peer review requests.
+
